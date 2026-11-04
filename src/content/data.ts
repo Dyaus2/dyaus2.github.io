@@ -64,7 +64,7 @@ export const projects: Project[] = [
       { value: 100, suffix: "%", label: { en: "copilot retrieval hit@1 on 26 document questions", fr: "hit@1 de la recherche du copilote sur 26 questions" } },
     ],
     stack: ["Python", "scikit-learn", "PyTorch", "SHAP", "MLflow", "FastAPI", "RAG", "React", "TypeScript", "Docker", "Hugging Face"],
-    links: [{ label: { en: "GitHub repository", fr: "Dépôt GitHub" }, url: "https://github.com/Dyaus2/turbowatch" }],
+    links: [{ label: { en: "Live demo", fr: "Démo en ligne" }, url: "https://dyaus2.github.io/turbowatch/" }, { label: { en: "GitHub repository", fr: "Dépôt GitHub" }, url: "https://github.com/Dyaus2/turbowatch" }],
   },
   {
     id: "ator",
