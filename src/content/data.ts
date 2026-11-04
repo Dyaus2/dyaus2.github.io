@@ -35,9 +35,37 @@ export interface Project {
   bullets: L[];
   metrics: Metric[];
   stack: string[];
+  links?: { label: L; url: string }[];
 }
 
 export const projects: Project[] = [
+  {
+    id: "turbowatch",
+    color: "#22d3ee",
+    title: "TurboWatch",
+    kicker: { en: "Flagship project · Predictive maintenance copilot", fr: "Projet phare · Copilote de maintenance prédictive" },
+    period: { en: "Nov 2026", fr: "Nov. 2026" },
+    role: { en: "Solo — ML, MLOps, backend, frontend, deployment", fr: "Seul — ML, MLOps, backend, frontend, déploiement" },
+    summary: {
+      en: "Fleet health dashboard on NASA C-MAPSS turbofan data: remaining-useful-life prediction with uncertainty, calibrated risk, cost-tuned alarms, SHAP explanations and a RAG copilot that cites FAA/NASA documents. Evaluated only on held-out engines.",
+      fr: "Tableau de bord de santé de flotte sur les données turboréacteurs NASA C-MAPSS : prédiction de durée de vie résiduelle avec incertitude, risque calibré, alarmes réglées sur une matrice de coûts, explications SHAP et copilote RAG citant des documents FAA/NASA. Évalué uniquement sur des moteurs tenus à l'écart.",
+    },
+    bullets: [
+      { en: "RUL models: gradient boosting + P10/P90 quantile band and a 1D-CNN (PyTorch) on causal, per-regime-normalised features shared by training and serving; engine-grouped fit/calibration/holdout split.", fr: "Modèles RUL : gradient boosting + bande quantile P10/P90 et CNN 1D (PyTorch) sur des variables causales normalisées par régime, partagées entre entraînement et production ; découpage par moteur fit/calibration/holdout." },
+      { en: "Alarm policy (k-of-n) tuned on calibration engines with a cost matrix (missed failure 100, false alarm 10); Isolation Forest vs autoencoder health scores compared honestly (the autoencoder was rejected).", fr: "Politique d'alarme (k parmi n) réglée sur les moteurs de calibration avec une matrice de coûts (panne manquée 100, fausse alarme 10) ; scores de santé Isolation Forest vs autoencodeur comparés honnêtement (l'autoencodeur a été écarté)." },
+      { en: "Maintenance copilot: bge-small + BM25 hybrid retrieval, reciprocal rank fusion and cross-encoder reranking over FAA/NASA public documents; cited answers, refusal when nothing relevant, LLM (Groq) or template fallback.", fr: "Copilote de maintenance : recherche hybride bge-small + BM25, fusion RRF et reranking par cross-encoder sur des documents publics FAA/NASA ; réponses citées, refus si rien de pertinent, LLM (Groq) ou modèle de secours." },
+      { en: "MLOps: MLflow tracking, PSI drift detection and a champion/challenger retraining scenario (FD001 → FD003 fleet: FD003 test RMSE 20.73 → 14.96), 26 pytest tests + ruff in GitHub Actions, Docker, Hugging Face Space.", fr: "MLOps : suivi MLflow, détection de dérive PSI et scénario de réentraînement champion/challenger (flotte FD001 → FD003 : RMSE test FD003 20,73 → 14,96), 26 tests pytest + ruff dans GitHub Actions, Docker, Hugging Face Space." },
+      { en: "FastAPI backend with a live replay stream and a React + TypeScript dashboard (fleet grid, engine timelines vs ground truth, SHAP drivers, copilot).", fr: "Backend FastAPI avec flux de rejeu en direct et tableau de bord React + TypeScript (grille de flotte, chronologies moteur vs vérité terrain, facteurs SHAP, copilote)." },
+    ],
+    metrics: [
+      { value: 97, suffix: "%", label: { en: "of failures detected on the official test set, at a 2% false-alarm rate (5 seeds)", fr: "des pannes détectées sur le jeu de test officiel, à 2 % de fausses alarmes (5 graines)" } },
+      { value: 36, label: { en: "cycles median warning before failure", fr: "cycles d'avance médiane avant la panne" } },
+      { value: 15.46, decimals: 2, label: { en: "RUL RMSE (1D-CNN, FD001 test, 5 seeds)", fr: "RMSE RUL (CNN 1D, test FD001, 5 graines)" } },
+      { value: 100, suffix: "%", label: { en: "copilot retrieval hit@1 on 26 document questions", fr: "hit@1 de la recherche du copilote sur 26 questions" } },
+    ],
+    stack: ["Python", "scikit-learn", "PyTorch", "SHAP", "MLflow", "FastAPI", "RAG", "React", "TypeScript", "Docker", "Hugging Face"],
+    links: [{ label: { en: "GitHub repository", fr: "Dépôt GitHub" }, url: "https://github.com/Dyaus2/turbowatch" }],
+  },
   {
     id: "ator",
     color: "#00e5ff",
@@ -199,6 +227,7 @@ export const timeline: TimelineItem[] = [
   { period: { en: "2023 – 2027", fr: "2023 – 2027" }, title: { en: "Engineering degree, Data Science & AI", fr: "Cycle ingénieur, Science des Données & IA" }, place: { en: "ESPRIT — Ariana, Tunisia", fr: "ESPRIT — Ariana, Tunisie" }, text: { en: "Final year; graduation expected 2027.", fr: "Dernière année ; diplôme prévu en 2027." } },
   { period: { en: "Jul – Sep 2025", fr: "Juil. – Sept. 2025" }, title: { en: "Developer Intern", fr: "Stagiaire Développeur" }, place: { en: "NEXT STEP IT — Charguia 1", fr: "NEXT STEP IT — Charguia 1" }, text: { en: "Django platform automating SOC reports (pair internship).", fr: "Plateforme Django automatisant les rapports SOC (stage en binôme)." } },
   { period: { en: "Jul – Sep 2026", fr: "Juil. – Sept. 2026" }, title: { en: "Machine Learning Intern (SOC)", fr: "Stagiaire Machine Learning (SOC)" }, place: { en: "NEXT STEP IT — Charguia 1", fr: "NEXT STEP IT — Charguia 1" }, text: { en: "ML detection layer + weekly MLOps chain for ATOR DFIR (18% → 84% coverage).", fr: "Couche de détection ML + chaîne MLOps hebdomadaire pour ATOR DFIR (couverture 18 % → 84 %)." } },
+  { period: { en: "Nov 2026", fr: "Nov. 2026" }, title: { en: "TurboWatch — flagship project", fr: "TurboWatch — projet phare" }, place: { en: "github.com/Dyaus2/turbowatch", fr: "github.com/Dyaus2/turbowatch" }, text: { en: "Predictive maintenance copilot: RUL, cost-tuned alarms, SHAP, RAG over FAA/NASA documents, MLOps, live dashboard.", fr: "Copilote de maintenance prédictive : RUL, alarmes réglées sur les coûts, SHAP, RAG sur documents FAA/NASA, MLOps, tableau de bord en direct." } },
   { period: { en: "From Jan/Feb 2027", fr: "Dès janv./févr. 2027" }, title: { en: "6-month end-of-studies internship (PFE)", fr: "Stage de fin d'études (PFE) de 6 mois" }, place: { en: "Your team? — open to relocation", fr: "Votre équipe ? — mobilité internationale" }, text: { en: "Applied data science: anomaly detection, LLM/RAG, MLOps, forecasting, computer vision.", fr: "Data science appliquée : détection d'anomalies, LLM/RAG, MLOps, prévision, vision par ordinateur." }, current: true },
 ];
 

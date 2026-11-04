@@ -66,6 +66,9 @@ export function ProjectSection({ p, i }: { p: Project; i: number }) {
         <p className="card-kicker">{t(p.kicker)} · {t(p.period)}</p>
         <Scramble as="h3" className="card-title" text={p.title} />
         <p className="card-summary">{t(p.summary)}</p>
+        {p.links && p.links.length > 0 && (
+          <div className="proj-links" data-ui>{p.links.map((l) => <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="proj-link" data-magnetic>{t(l.label)} ↗</a>)}</div>
+        )}
         {p.metrics.length > 0 && (
           <div className="mini-metrics">
             {p.metrics.slice(0, 2).map((m, k) => (

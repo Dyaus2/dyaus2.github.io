@@ -263,3 +263,7 @@ body.custom-cursor, body.custom-cursor * { cursor: none !important; }
   *, *::before, *::after { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; }
   .grain { display: none; }
 }
+
+.proj-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.proj-link { font: 600 12px var(--font-mono); padding: 6px 12px; border-radius: 99px; border: 1px solid color-mix(in srgb, var(--accent) 50%, transparent); color: var(--accent); text-decoration: none; transition: box-shadow 0.3s, background 0.3s; }
+.proj-link:hover { background: color-mix(in srgb, var(--accent) 12%, transparent); box-shadow: 0 0 18px color-mix(in srgb, var(--accent) 40%, transparent); }

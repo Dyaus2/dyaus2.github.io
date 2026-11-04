@@ -85,6 +85,9 @@ export function ProjectOverlay() {
         <Scramble key={p.id + lang} as="h2" className="ov-title" text={p.title} duration={0.9} />
         <p className="ov-role ov-anim">{t(p.role)}</p>
         <p className="ov-summary ov-anim">{t(p.summary)}</p>
+        {p.links && p.links.length > 0 && (
+          <div className="proj-links" data-ui>{p.links.map((l) => <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="proj-link" data-magnetic>{t(l.label)} ↗</a>)}</div>
+        )}
         {p.metrics.length > 0 && (
           <>
             <h4 className="ov-h ov-anim">{t(ui.results)}</h4>
