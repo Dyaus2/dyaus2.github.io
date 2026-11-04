@@ -112,6 +112,7 @@ body.custom-cursor, body.custom-cursor * { cursor: none !important; }
 .panel.wide { max-width: 860px; }
 .facts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
 .fact { padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line); background: rgba(255, 255, 255, 0.02); transition: border-color 0.3s, translate 0.3s; }
+.fact.wide { grid-column: 1 / -1; }
 .fact:hover { border-color: var(--cyan); translate: 0 -3px; }
 .fact dt { font: 11px var(--font-mono); text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
 .fact dd { font: 600 15px var(--font-display); }
@@ -175,6 +176,8 @@ body.custom-cursor, body.custom-cursor * { cursor: none !important; }
 .cert:hover { border-color: var(--amber); box-shadow: 0 0 22px rgba(255, 181, 71, 0.25); translate: 6px 0; }
 .cert-issuer { grid-column: 1 / -1; font: 600 11px var(--font-mono); color: var(--amber); }
 .cert-title { font-weight: 500; font-size: 14px; }
+.cert-link { color: inherit; text-decoration: none; border-bottom: 1px dashed currentColor; }
+.cert-link:hover { color: var(--accent, #00e5ff); }
 .cert-year { font: 12px var(--font-mono); color: var(--muted); }
 .langs { margin-top: 22px; color: var(--muted); font-size: 14px; }
 

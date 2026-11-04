@@ -1,4 +1,4 @@
-// All content comes from Hazem Ilahi's CV (Resume_pfe.pdf) and his own statements.
+// All content comes from Hazem Ilahi's CVs (Hazem_Ilahi_Resume_EN/French.pdf, Nov 2026), his own statements and verified TurboWatch results.
 // Bilingual: every user-facing string is { en, fr }.
 
 export type Lang = "en" | "fr";
@@ -54,7 +54,8 @@ export const projects: Project[] = [
       { en: "RUL models: gradient boosting + P10/P90 quantile band and a 1D-CNN (PyTorch) on causal, per-regime-normalised features shared by training and serving; engine-grouped fit/calibration/holdout split.", fr: "Modèles RUL : gradient boosting + bande quantile P10/P90 et CNN 1D (PyTorch) sur des variables causales normalisées par régime, partagées entre entraînement et production ; découpage par moteur fit/calibration/holdout." },
       { en: "Alarm policy (k-of-n) tuned on calibration engines with a cost matrix (missed failure 100, false alarm 10); Isolation Forest vs autoencoder health scores compared honestly (the autoencoder was rejected).", fr: "Politique d'alarme (k parmi n) réglée sur les moteurs de calibration avec une matrice de coûts (panne manquée 100, fausse alarme 10) ; scores de santé Isolation Forest vs autoencodeur comparés honnêtement (l'autoencodeur a été écarté)." },
       { en: "Maintenance copilot: bge-small + BM25 hybrid retrieval, reciprocal rank fusion and cross-encoder reranking over FAA/NASA public documents; cited answers, refusal when nothing relevant, LLM (Groq) or template fallback.", fr: "Copilote de maintenance : recherche hybride bge-small + BM25, fusion RRF et reranking par cross-encoder sur des documents publics FAA/NASA ; réponses citées, refus si rien de pertinent, LLM (Groq) ou modèle de secours." },
-      { en: "MLOps: MLflow tracking, PSI drift detection and a champion/challenger retraining scenario (FD001 → FD003 fleet: FD003 test RMSE 20.73 → 14.96), 26 pytest tests + ruff in GitHub Actions, Docker, Hugging Face Space.", fr: "MLOps : suivi MLflow, détection de dérive PSI et scénario de réentraînement champion/challenger (flotte FD001 → FD003 : RMSE test FD003 20,73 → 14,96), 26 tests pytest + ruff dans GitHub Actions, Docker, Hugging Face Space." },
+      { en: "MLOps: MLflow tracking, PSI drift detection and a champion/challenger retraining scenario (FD001 → FD003 fleet: FD003 test RMSE 20.73 → 14.96); pytest, ruff and a Docker build + container smoke test in GitHub Actions.", fr: "MLOps : suivi MLflow, détection de dérive PSI et scénario de réentraînement champion/challenger (flotte FD001 → FD003 : RMSE test FD003 20,73 → 14,96) ; pytest, ruff et construction Docker + test du conteneur dans GitHub Actions." },
+      { en: "Live static demo on GitHub Pages: the dashboard replays the pipeline's exported outputs (checked against the real API by a parity test) and the copilot runs entirely in the browser (transformers.js) with the same retrieval scores.", fr: "Démo statique en ligne sur GitHub Pages : le tableau de bord rejoue les sorties exportées du pipeline (vérifiées contre la vraie API par un test de parité) et le copilote tourne entièrement dans le navigateur (transformers.js) avec les mêmes scores de recherche." },
       { en: "FastAPI backend with a live replay stream and a React + TypeScript dashboard (fleet grid, engine timelines vs ground truth, SHAP drivers, copilot).", fr: "Backend FastAPI avec flux de rejeu en direct et tableau de bord React + TypeScript (grille de flotte, chronologies moteur vs vérité terrain, facteurs SHAP, copilote)." },
     ],
     metrics: [
@@ -63,7 +64,7 @@ export const projects: Project[] = [
       { value: 15.46, decimals: 2, label: { en: "RUL RMSE (1D-CNN, FD001 test, 5 seeds)", fr: "RMSE RUL (CNN 1D, test FD001, 5 graines)" } },
       { value: 100, suffix: "%", label: { en: "copilot retrieval hit@1 on 26 document questions", fr: "hit@1 de la recherche du copilote sur 26 questions" } },
     ],
-    stack: ["Python", "scikit-learn", "PyTorch", "SHAP", "MLflow", "FastAPI", "RAG", "React", "TypeScript", "Docker", "Hugging Face"],
+    stack: ["Python", "scikit-learn", "PyTorch", "SHAP", "MLflow", "FastAPI", "RAG", "React", "TypeScript", "Docker", "transformers.js"],
     links: [{ label: { en: "Live demo", fr: "Démo en ligne" }, url: "https://dyaus2.github.io/turbowatch/" }, { label: { en: "GitHub repository", fr: "Dépôt GitHub" }, url: "https://github.com/Dyaus2/turbowatch" }],
   },
   {
@@ -114,28 +115,28 @@ export const projects: Project[] = [
   {
     id: "garage",
     color: "#b06cff",
-    title: "Garage Augmenté",
-    kicker: { en: "ESPRIT team project · Multi-agent RAG assistant", fr: "Projet d'équipe ESPRIT · Assistant multi-agents RAG" },
+    title: "UnderHood",
+    kicker: { en: "ESPRIT team project (Garage Augmenté) · Multi-agent RAG assistant", fr: "Projet d'équipe ESPRIT (Garage Augmenté) · Assistant multi-agents RAG" },
     period: { en: "2026 – 2027", fr: "2026 – 2027" },
     role: { en: "Owner of the knowledge base and retrieval layer", fr: "Responsable de la base de connaissances et de la couche de recherche" },
     summary: {
-      en: "Multi-agent RAG assistant for automotive pre-diagnosis, grounded in thousands of official owner's manuals.",
-      fr: "Assistant multi-agents RAG de pré-diagnostic automobile, ancré dans des milliers de manuels constructeurs.",
+      en: "Multi-agent RAG assistant for automotive pre-diagnosis, grounded in thousands of owner's manuals and exposed to a LangGraph diagnostic agent.",
+      fr: "Assistant multi-agents RAG de pré-diagnostic automobile, ancré dans des milliers de manuels du propriétaire et exposé à un agent de diagnostic LangGraph.",
     },
     bullets: [
-      { en: "Tunisian car-market study (2015–2026 registrations, fleet) to rank brands in 3 priority tiers and select 56 priority models.", fr: "Étude du marché automobile tunisien (immatriculations 2015–2026, parc roulant) pour classer les marques en 3 niveaux et retenir 56 modèles prioritaires." },
-      { en: "7 resumable Python collectors (XML catalogs, JSON APIs, sitemaps, Next.js data routes): 73% official manufacturer sources, 54 of 56 priority models covered.", fr: "7 collecteurs Python reprenables (catalogues XML, API JSON, sitemaps, routes Next.js) : 73 % de sources constructeurs officielles, 54 des 56 modèles prioritaires couverts." },
-      { en: "Corpus prep: SHA-256 dedup, Tesseract OCR of ≈18,500 pages, metadata normalised into 364 model families, ≈39M-token index.", fr: "Préparation du corpus : déduplication SHA-256, OCR Tesseract de ≈ 18 500 pages, métadonnées normalisées en 364 familles de modèles, index de ≈ 39 M tokens." },
-      { en: "Modular RAG on Qdrant: multilingual query expansion (FR/EN/Tunisian Arabic), hybrid BGE-M3 + BM25 with reciprocal rank fusion, brand/model/year filters, cross-encoder reranking.", fr: "RAG modulaire sur Qdrant : expansion de requêtes multilingue (FR/EN/arabe tunisien), recherche hybride BGE-M3 + BM25 fusionnée par RRF, filtres marque/modèle/année, reranking par cross-encoder." },
-      { en: "FastAPI service for the n8n workflow, ablation bench (hit@k, MRR), documented Docker Compose hand-off for the GPU host.", fr: "Service FastAPI pour le workflow n8n, banc d'ablation (hit@k, MRR), paquet de transfert Docker Compose documenté pour la machine GPU." },
+      { en: "Corpus: 7 resumable Python collectors gathering 2,019 owner's manuals (≈697,000 pages, 26 brands, 73% official sources), covering 54 of the 56 priority models of the Tunisian market.", fr: "Corpus : 7 collecteurs Python reprenables : 2 019 manuels du propriétaire (≈ 697 000 pages, 26 marques, 73 % de sources officielles), couvrant 54 des 56 modèles prioritaires du marché tunisien." },
+      { en: "SHA-256 deduplication, Tesseract OCR (≈18,500 pages), 364 model families, Qdrant index of 101,417 passages.", fr: "Déduplication SHA-256, OCR Tesseract (≈ 18 500 pages), 364 familles de modèles, index Qdrant de 101 417 passages." },
+      { en: "Retrieval: query expansion in French / English / Tunisian Derja plus LLM query rewriting, hybrid BGE-M3 + BM25 search (RRF), brand/model/year filtering, cross-encoder reranking and exact lookup of 9,533 OBD-II codes.", fr: "Recherche : expansion de requêtes FR / EN / derja tunisienne et réécriture par LLM, recherche hybride BGE-M3 + BM25 (RRF), filtre marque/modèle/année, reranking par cross-encoder et consultation exacte de 9 533 codes OBD-II." },
+      { en: "All exposed as a FastAPI service to the diagnostic agent (LangGraph).", fr: "Le tout est exposé en service FastAPI à l'agent de diagnostic (LangGraph)." },
+      { en: "Evaluation: ablation on 40 questions (hit@5, MRR, double-blind LLM judging): the vehicle filter raises the share of correct answers found in the right manual from 0% to 72% (MRR 0.63).", fr: "Évaluation : ablation sur 40 questions (hit@5, MRR, jugement LLM en double aveugle) : le filtre véhicule fait passer le taux de bonnes réponses dans le bon manuel de 0 % à 72 % (MRR 0,63)." },
     ],
     metrics: [
-      { value: 2019, label: { en: "unique owner's manuals (26 brands)", fr: "manuels du propriétaire uniques (26 marques)" } },
-      { value: 697000, prefix: "≈", label: { en: "pages collected", fr: "pages collectées" } },
-      { value: 98000, label: { en: "units in the main index", fr: "unités dans l'index principal" } },
-      { value: 9533, label: { en: "OBD fault codes, exact lookup", fr: "codes défaut OBD, consultation exacte" } },
+      { value: 72, suffix: "%", label: { en: "correct answers found in the right manual with the vehicle filter (0% without)", fr: "bonnes réponses trouvées dans le bon manuel avec le filtre véhicule (0 % sans)" } },
+      { value: 2019, label: { en: "owner's manuals (26 brands)", fr: "manuels du propriétaire (26 marques)" } },
+      { value: 101417, label: { en: "passages in the Qdrant index", fr: "passages dans l'index Qdrant" } },
+      { value: 9533, label: { en: "OBD-II codes, exact lookup", fr: "codes OBD-II, consultation exacte" } },
     ],
-    stack: ["Python", "Qdrant", "BGE-M3", "BM25", "PyMuPDF", "Tesseract", "FastAPI", "Docker Compose", "n8n"],
+    stack: ["Python", "Qdrant", "BGE-M3", "BM25", "FastAPI", "LangGraph", "PyMuPDF", "Tesseract"],
   },
   {
     id: "kadastra",
@@ -160,25 +161,26 @@ export const projects: Project[] = [
     id: "dressme",
     color: "#ff5fa2",
     title: "DressMe",
-    kicker: { en: "ESPRIT team project · Advanced Data Science Project", fr: "Projet d'équipe ESPRIT · Advanced Data Science Project" },
+    kicker: { en: "ESPRIT team project (7 people) · Advanced Data Science Project", fr: "Projet d'équipe ESPRIT (7 personnes) · Advanced Data Science Project" },
     period: { en: "2026 – 2027", fr: "2026 – 2027" },
-    role: { en: "Design phase — Design Thinking", fr: "Phase de conception — Design Thinking" },
+    role: { en: "From design to working prototype (API + mobile app)", fr: "De la conception au prototype fonctionnel (API + application mobile)" },
     summary: {
-      en: "Smart personal fashion assistant for the Tunisian market, designed around a single garment representation.",
-      fr: "Assistant de mode personnel intelligent pour le marché tunisien, conçu autour d'une représentation unique du vêtement.",
+      en: "Smart personal fashion assistant for the Tunisian market: style representation, personalized outfits, vision and generative AI, explainable recommendations and a second-hand marketplace.",
+      fr: "Assistant de mode personnel intelligent pour le marché tunisien : représentation du style, tenues personnalisées, vision et IA générative, recommandations explicables et marché de seconde main.",
     },
     bullets: [
-      { en: "User research (17-respondent survey, 6 personas) turned into 5 business & data-science objectives with metrics and a 3-version roadmap.", fr: "Recherche utilisateur (17 répondants, 6 personas) traduite en 5 objectifs métier et data science avec métriques et feuille de route en 3 versions." },
-      { en: "5-layer architecture: mobile client, FastAPI gateway + Redis Streams, business services, ML models, PostgreSQL / FAISS.", fr: "Architecture en 5 couches : client mobile, passerelle FastAPI + Redis Streams, services métier, modèles ML, PostgreSQL / FAISS." },
-      { en: "6 ML pipelines specified: YOLO + SAM 2 + Qwen3-VL ingestion, HDBSCAN + RAG style profile, BPR outfit compatibility (Polyvore), diffusion try-on, ReAct resale agent with LightGBM pricing, Two-Tower + LightGBM ranker.", fr: "6 pipelines ML spécifiés : ingestion YOLO + SAM 2 + Qwen3-VL, profil de style HDBSCAN + RAG, compatibilité de tenues BPR (Polyvore), essayage par diffusion, agent de revente ReAct avec prix LightGBM, recommandeur Two-Tower + LightGBM." },
-      { en: "Explainability (additive reason codes, TreeSHAP, LIME, counterfactuals) and privacy by design (on-device face blurring, EXIF removal).", fr: "Explicabilité (codes de raison additifs, TreeSHAP, LIME, contrefactuels) et respect de la vie privée (floutage des visages sur l'appareil, suppression des EXIF)." },
+      { en: "Style representation: benchmarked encoders on Polyvore (152,785 items, 95% bootstrap CIs); chose Qwen3-VL-Embedding-2B, as accurate as the 8B model but 3.7× faster. \"Fashion DNA\" learned by a Set Transformer trained contrastively (InfoNCE).", fr: "Représentation du style : benchmark d'encodeurs sur Polyvore (152 785 articles, IC bootstrap à 95 %) ; choix de Qwen3-VL-Embedding-2B, aussi précis que le 8B mais 3,7× plus rapide. « Fashion DNA » apprise par un Set Transformer entraîné en contrastif (InfoNCE)." },
+      { en: "Personalized outfits: compatibility head per category pair (AUC 0.852 vs 0.830 for cosine alone), beam-search generation conditioned on weather and occasion, Thompson-sampling personalization with a population prior, evaluated on 40 simulated personas over 60 days.", fr: "Tenues personnalisées : tête de compatibilité par paire de catégories (AUC 0,852 contre 0,830 pour le cosinus seul), génération par beam search selon la météo et l'occasion, personnalisation par Thompson sampling avec prior de population, évaluée sur 40 personas simulées pendant 60 jours." },
+      { en: "Vision and generative AI: SAM 3 segmentation and garment recognition from photos (96.6% accuracy in auto-fill), diffusion-based virtual try-on (Qwen Image Edit via ComfyUI), local LLM stylist (Qwen 9B) with every sentence checked against facts: 199 of 200 answers grounded.", fr: "Vision et IA générative : segmentation SAM 3 et reconnaissance des vêtements sur photo (96,6 % de précision en remplissage automatique), essayage virtuel par diffusion (Qwen Image Edit via ComfyUI), styliste LLM local (Qwen 9B) dont chaque phrase est vérifiée contre les faits : 199 réponses sur 200 ancrées." },
+      { en: "Explainable AI and marketplace: exact per-criterion contributions to the score; occlusion maps evaluated for faithfulness (deletion/insertion curves); concepts shown only above 0.85 AUC; second-hand prices predicted by quantile LightGBM with conformal calibration (80.0% coverage on 423k listings), explained with TreeSHAP.", fr: "IA explicable et marché : contributions exactes de chaque critère au score ; cartes d'occlusion évaluées en fidélité (courbes deletion/insertion) ; concepts affichés seulement au-delà d'une AUC de 0,85 ; prix de seconde main prédits par LightGBM quantile et calibration conforme (couverture 80,0 % sur 423 k annonces), expliqués par TreeSHAP." },
     ],
     metrics: [
-      { value: 6, label: { en: "ML pipelines specified", fr: "pipelines ML spécifiés" } },
-      { value: 6, label: { en: "personas", fr: "personas" } },
-      { value: 5, label: { en: "architecture layers", fr: "couches d'architecture" } },
+      { value: 0.852, decimals: 3, label: { en: "outfit-compatibility AUC (vs 0.830 cosine alone)", fr: "AUC de compatibilité des tenues (contre 0,830 cosinus seul)" } },
+      { value: 96.6, decimals: 1, suffix: "%", label: { en: "garment recognition accuracy in auto-fill", fr: "précision de reconnaissance des vêtements en remplissage automatique" } },
+      { value: 199, suffix: "/200", label: { en: "LLM stylist answers grounded in facts", fr: "réponses du styliste LLM ancrées dans les faits" } },
+      { value: 80.0, decimals: 1, suffix: "%", label: { en: "conformal price-interval coverage on 423k listings", fr: "couverture des intervalles de prix conformes sur 423 k annonces" } },
     ],
-    stack: ["FastAPI", "Redis Streams", "PostgreSQL", "FAISS", "YOLO", "SAM 2", "Qwen3-VL", "LightGBM"],
+    stack: ["Python", "PyTorch", "FastAPI", "LightGBM", "llama.cpp", "Qwen3-VL", "SAM 3", "React Native (Expo)"],
   },
   {
     id: "sat",
@@ -233,11 +235,11 @@ export const timeline: TimelineItem[] = [
 
 export const skillGroups: { name: L; items: string[] }[] = [
   { name: { en: "Languages", fr: "Langages" }, items: ["Python", "R", "SQL", "C/C++", "Java", "PHP"] },
-  { name: { en: "ML / DL", fr: "ML / DL" }, items: ["scikit-learn", "XGBoost", "PyTorch", "TensorFlow", "Keras", "Anomaly detection", "Calibration", "Grouped CV"] },
-  { name: { en: "LLM / RAG / NLP", fr: "LLM / RAG / NLP" }, items: ["Qdrant", "BGE-M3", "BM25", "Hybrid search", "Reranking", "hit@k / MRR"] },
-  { name: { en: "MLOps", fr: "MLOps" }, items: ["Automated retraining", "Model registry", "Champion/challenger", "Drift monitoring", "pytest"] },
-  { name: { en: "Data", fr: "Data" }, items: ["pandas", "NumPy", "ETL", "SQLite", "Power BI", "Tableau"] },
-  { name: { en: "Web & deployment", fr: "Web & déploiement" }, items: ["FastAPI", "Django", "Flask", "Spring Boot", "Symfony", "REST APIs", "Docker", "Git"] },
+  { name: { en: "ML / DL", fr: "ML / DL" }, items: ["scikit-learn", "XGBoost", "PyTorch", "TensorFlow", "Keras", "Anomaly detection", "Probability calibration", "Grouped CV", "Computer vision (CNN, ViT, CLIP, BLIP)", "Time series (ARIMA/SARIMA)"] },
+  { name: { en: "LLM / RAG / NLP", fr: "LLM / RAG / NLP" }, items: ["RAG pipelines", "Qdrant", "BGE-M3", "BM25", "Hybrid search", "Cross-encoder reranking", "hit@k / MRR", "Transformers"] },
+  { name: { en: "MLOps", fr: "MLOps" }, items: ["Automated retraining", "Model registry", "MLflow", "Champion/challenger", "Drift monitoring (PSI)", "Quality gates", "Canary & rollback", "pytest"] },
+  { name: { en: "Data", fr: "Data" }, items: ["pandas", "NumPy", "ETL", "Web scraping", "OCR (Tesseract)", "SQLite", "Power BI", "Tableau"] },
+  { name: { en: "Cloud & deployment", fr: "Cloud & déploiement" }, items: ["AWS (Cloud Foundations)", "Docker", "Docker Compose", "FastAPI", "Django", "Flask", "Spring Boot", "Symfony", "REST APIs", "n8n", "Git"] },
   { name: { en: "Methods", fr: "Méthodes" }, items: ["Microsoft TDSP", "CRISP-DM", "Design Thinking", "Agile/Scrum"] },
 ];
 
@@ -248,20 +250,16 @@ export const sphereSkills = [
   "Champion/Challenger", "Django", "Power BI", "Transformers", "ARIMA", "Computer Vision", "Git", "pytest", "ETL",
 ];
 
-export interface Cert { title: string; issuer: string; year: string; show: boolean }
+export interface Cert { title: string; issuer: string; year: string; show: boolean; url?: string }
 export const certs: Cert[] = [
+  { title: "AWS Cloud Foundations", issuer: "Amazon Web Services", year: "Nov 2026", show: true, url: "https://www.credly.com/earner/earned/badge/64339ed0-debf-40c3-8ec5-70c4a48f495b" },
   { title: "Fundamentals of Deep Learning", issuer: "NVIDIA", year: "2026", show: true },
   { title: "Applications of AI for Anomaly Detection", issuer: "NVIDIA", year: "2026", show: true },
   { title: "Building Transformer-Based NLP Applications", issuer: "NVIDIA", year: "2026", show: true },
-  { title: "AWS Cloud Foundations", issuer: "Amazon Web Services", year: "2026", show: true },
   { title: "CCNA 2: Switching, Routing, and Wireless Essentials", issuer: "Cisco Networking Academy", year: "2025", show: true },
-  // Hedera certifications: set show:true and fill the exact titles once issued.
-  { title: "Hedera certification #1 (title TBD)", issuer: "Hedera", year: "2026", show: false },
-  { title: "Hedera certification #2 (title TBD)", issuer: "Hedera", year: "2026", show: false },
-  { title: "Hedera certification #3 (title TBD)", issuer: "Hedera", year: "2026", show: false },
 ];
 
 export const languages: L = {
-  en: "English — fluent · French — advanced · Arabic — native",
-  fr: "Anglais — courant · Français — avancé · Arabe — langue maternelle",
+  en: "English — fluent · French — advanced (professional working proficiency) · Arabic — native",
+  fr: "Arabe — langue maternelle · Français — courant (niveau avancé, usage professionnel) · Anglais — courant",
 };

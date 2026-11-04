@@ -45,7 +45,7 @@ export function About() {
         <p className="lead">{t(ui.aboutText)}</p>
         <dl className="facts" data-stagger>
           {ui.aboutFacts.map((f, i) => (
-            <div key={i} className="fact"><dt>{t(f.k)}</dt><dd>{t(f.v)}</dd></div>
+            <div key={i} className={`fact${"wide" in f && f.wide ? " wide" : ""}`}><dt>{t(f.k)}</dt><dd>{t(f.v)}</dd></div>
           ))}
         </dl>
       </div>
@@ -133,7 +133,7 @@ export function Skills() {
           {certs.filter((c) => c.show).map((c) => (
             <li key={c.title} className="cert">
               <span className="cert-issuer">{c.issuer}</span>
-              <span className="cert-title">{c.title}</span>
+              <span className="cert-title">{c.url ? <a href={c.url} target="_blank" rel="noopener noreferrer" className="cert-link" data-magnetic>{c.title} ↗</a> : c.title}</span>
               <span className="cert-year">{c.year}</span>
             </li>
           ))}

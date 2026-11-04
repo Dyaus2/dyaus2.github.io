@@ -18,6 +18,7 @@ export const ui = {
     { k: { en: "Available", fr: "Disponible" }, v: { en: "Jan/Feb 2027 · 6 months", fr: "Janv./févr. 2027 · 6 mois" } },
     { k: { en: "Mobility", fr: "Mobilité" }, v: { en: "Open to relocation", fr: "Mobilité internationale" } },
     { k: { en: "Languages", fr: "Langues" }, v: { en: "EN · FR · AR", fr: "AN · FR · AR" } },
+    { k: { en: "Agreement", fr: "Convention" }, v: { en: "Mandatory curricular internship · tripartite, signed by ESPRIT", fr: "Stage obligatoire du cursus · tripartite, signée par ESPRIT" }, wide: true },
   ],
   projectsKicker: { en: "02 — Projects", fr: "02 — Projets" },
   projectsIntro: { en: "Each glowing cluster in the network is a project. Click one to dive in.", fr: "Chaque amas lumineux du réseau est un projet. Cliquez pour plonger dedans." },
