@@ -3,6 +3,7 @@ import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 import type { Project } from "../content/data";
 import { sound } from "../lib/sound";
+import posthog, { isPostHogEnabled, portfolioLogger } from "../lib/posthog";
 import { getUI, setUI, useUI } from "../lib/store";
 import { Graph } from "./Graph";
 import { knnEdges, rng, textSprite } from "./world";
@@ -68,6 +69,8 @@ export function Cluster({ project, index, position, nodes, fontsReady }: Props) 
   const click = (e: ThreeEvent<MouseEvent>) => {
     e.stopPropagation();
     if (blocked(e) || getUI().focus) return;
+    if (isPostHogEnabled) posthog.capture("project_detail_opened", { project_id: project.id });
+    portfolioLogger.info("portfolio project detail opened", { project_id: project.id, interaction_source: "three_dimensional_cluster" });
     sound.whoosh();
     setUI({ focus: project.id });
   };

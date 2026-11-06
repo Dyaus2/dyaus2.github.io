@@ -3,6 +3,7 @@ import { certs, languages, profile, projects, skillGroups, timeline, type Projec
 import { ui, useLang } from "../content/i18n";
 import { CountUp, Scramble } from "../lib/anim";
 import { sound } from "../lib/sound";
+import posthog, { isPostHogEnabled, portfolioLogger } from "../lib/posthog";
 import { setUI } from "../lib/store";
 import { clusterSide } from "../three/world";
 
@@ -56,7 +57,15 @@ export function About() {
 export function ProjectSection({ p, i }: { p: Project; i: number }) {
   const { t, lang } = useLang();
   const side = clusterSide[i] === 1 ? "left" : "right"; // card opposite to the 3D cluster
-  const open = () => { sound.whoosh(); setUI({ focus: p.id }); };
+  const open = () => {
+    if (isPostHogEnabled) posthog.capture("project_detail_opened", { project_id: p.id });
+    portfolioLogger.info("portfolio project detail opened", { project_id: p.id, interaction_source: "project_card" });
+    sound.whoosh();
+    setUI({ focus: p.id });
+  };
+  const trackProjectLink = (linkType: "live_demo" | "repository") => {
+    if (isPostHogEnabled) posthog.capture("project_link_clicked", { project_id: p.id, link_type: linkType });
+  };
   return (
     <section className={`section project ${side}`} id={i === 0 ? "projects" : `project-${p.id}`} data-section style={{ ["--accent" as string]: p.color }}>
       <article className="card glass" data-ui data-reveal={side}
@@ -67,7 +76,7 @@ export function ProjectSection({ p, i }: { p: Project; i: number }) {
         <Scramble as="h3" className="card-title" text={p.title} />
         <p className="card-summary">{t(p.summary)}</p>
         {p.links && p.links.length > 0 && (
-          <div className="proj-links" data-ui>{p.links.map((l) => <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="proj-link" data-magnetic>{t(l.label)} ↗</a>)}</div>
+          <div className="proj-links" data-ui>{p.links.map((l) => <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="proj-link" data-magnetic onClick={() => trackProjectLink(l.label.en === "Live demo" ? "live_demo" : "repository")}>{t(l.label)} ↗</a>)}</div>
         )}
         {p.metrics.length > 0 && (
           <div className="mini-metrics">
@@ -148,7 +157,7 @@ export function Contact() {
   const { t } = useLang();
   const [copied, setCopied] = useState(false);
   const copy = async () => {
-    try { await navigator.clipboard.writeText(profile.email); setCopied(true); sound.blip(1320); window.setTimeout(() => setCopied(false), 1800); }
+    try { await navigator.clipboard.writeText(profile.email); if (isPostHogEnabled) posthog.capture("contact_email_copied"); setCopied(true); sound.blip(1320); window.setTimeout(() => setCopied(false), 1800); }
     catch { window.location.href = `mailto:${profile.email}`; }
   };
   return (
@@ -159,17 +168,17 @@ export function Contact() {
         <p className="lead center" data-reveal>{t(ui.contactText)}</p>
         <div className="contact-grid" data-stagger>
           <div className="contact-item glass">
-            <a href={`mailto:${profile.email}`} data-magnetic className="contact-link">{profile.email}</a>
+            <a href={`mailto:${profile.email}`} onClick={() => { if (isPostHogEnabled) posthog.capture("contact_method_clicked", { method: "email" }); }} data-magnetic className="contact-link">{profile.email}</a>
             <button className="mini-btn" onClick={copy}>{copied ? t(ui.copied) : t(ui.copy)}</button>
           </div>
-          <a className="contact-item glass contact-link" href={profile.phoneHref} data-magnetic>{profile.phone}</a>
-          <a className="contact-item glass contact-link" href={profile.linkedin} target="_blank" rel="noopener noreferrer" data-magnetic>LinkedIn ↗</a>
-          <a className="contact-item glass contact-link" href={profile.github} target="_blank" rel="noopener noreferrer" data-magnetic>GitHub ↗</a>
+          <a className="contact-item glass contact-link" href={profile.phoneHref} onClick={() => { if (isPostHogEnabled) posthog.capture("contact_method_clicked", { method: "phone" }); }} data-magnetic>{profile.phone}</a>
+          <a className="contact-item glass contact-link" href={profile.linkedin} onClick={() => { if (isPostHogEnabled) posthog.capture("contact_method_clicked", { method: "linkedin" }); }} target="_blank" rel="noopener noreferrer" data-magnetic>LinkedIn ↗</a>
+          <a className="contact-item glass contact-link" href={profile.github} onClick={() => { if (isPostHogEnabled) posthog.capture("contact_method_clicked", { method: "github" }); }} target="_blank" rel="noopener noreferrer" data-magnetic>GitHub ↗</a>
         </div>
         <div className="cv-row" data-reveal>
           <span className="cv-label">{t(ui.downloadCv)}</span>
-          <a className="btn btn-accent" href={profile.cv.en} download data-magnetic><span>{t(ui.cvEn)}</span><span className="btn-arrow">↓</span></a>
-          <a className="btn btn-ghost" href={profile.cv.fr} download data-magnetic><span>{t(ui.cvFr)}</span><span className="btn-arrow">↓</span></a>
+          <a className="btn btn-accent" href={profile.cv.en} download onClick={() => { if (isPostHogEnabled) posthog.capture("cv_downloaded", { language: "en" }); }} data-magnetic><span>{t(ui.cvEn)}</span><span className="btn-arrow">↓</span></a>
+          <a className="btn btn-ghost" href={profile.cv.fr} download onClick={() => { if (isPostHogEnabled) posthog.capture("cv_downloaded", { language: "fr" }); }} data-magnetic><span>{t(ui.cvFr)}</span><span className="btn-arrow">↓</span></a>
         </div>
         <footer className="footer">{t(ui.footer)} · © 2026</footer>
       </div>

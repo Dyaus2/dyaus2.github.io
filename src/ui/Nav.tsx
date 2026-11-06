@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { ui, useLang } from "../content/i18n";
 import { sound } from "../lib/sound";
+import posthog, { isPostHogEnabled, portfolioLogger } from "../lib/posthog";
 import { setUI, useUI } from "../lib/store";
 
 const LINKS: { id: string; key: keyof typeof ui.nav }[] = [
@@ -48,7 +49,7 @@ export function Nav() {
         ))}
       </nav>
       <div className="nav-tools">
-        <button className={`lang-toggle ${lang}`} onClick={() => { setLang(lang === "en" ? "fr" : "en"); sound.blip(740); }} data-magnetic aria-label="Language EN/FR">
+        <button className={`lang-toggle ${lang}`} onClick={() => { const nextLanguage = lang === "en" ? "fr" : "en"; setLang(nextLanguage); if (isPostHogEnabled) posthog.capture("language_changed", { language: nextLanguage }); portfolioLogger.info("portfolio language changed", { language: nextLanguage }); sound.blip(740); }} data-magnetic aria-label="Language EN/FR">
           <span className="lang-pill" />
           <span className="lang-opt">EN</span>
           <span className="lang-opt">FR</span>

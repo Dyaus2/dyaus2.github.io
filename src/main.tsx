@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import { LangProvider } from "./content/i18n";
+import "./lib/posthog";
 import "./styles.css";
 
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
