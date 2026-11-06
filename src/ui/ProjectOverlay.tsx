@@ -4,6 +4,7 @@ import { ui, useLang } from "../content/i18n";
 import { CountUp, gsap, Scramble } from "../lib/anim";
 import { prefersReducedMotion } from "../lib/device";
 import { sound } from "../lib/sound";
+import posthog, { isPostHogEnabled } from "../lib/posthog";
 import { setUI, useUI } from "../lib/store";
 
 /** Side panel (bottom sheet on phones) with full project details; the camera zooms into the cluster meanwhile. */
@@ -60,6 +61,10 @@ export function ProjectOverlay() {
     return () => { removeEventListener("keydown", key); document.documentElement.classList.remove("lock"); };
   });
 
+  const trackProjectLink = (projectId: string, linkType: "live_demo" | "repository") => {
+    if (isPostHogEnabled) posthog.capture("project_link_clicked", { project_id: projectId, link_type: linkType });
+  };
+
   const step = (dir: number) => {
     const n = (idx + dir + projects.length) % projects.length;
     sound.whoosh();
@@ -86,7 +91,7 @@ export function ProjectOverlay() {
         <p className="ov-role ov-anim">{t(p.role)}</p>
         <p className="ov-summary ov-anim">{t(p.summary)}</p>
         {p.links && p.links.length > 0 && (
-          <div className="proj-links" data-ui>{p.links.map((l) => <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="proj-link" data-magnetic>{t(l.label)} ↗</a>)}</div>
+          <div className="proj-links" data-ui>{p.links.map((l) => <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="proj-link" data-magnetic onClick={() => trackProjectLink(p.id, l.label.en === "Live demo" ? "live_demo" : "repository")}>{t(l.label)} ↗</a>)}</div>
         )}
         {p.metrics.length > 0 && (
           <>
